@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Blajs by LeonardoCiaccio</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Blajs</h1>
+        <h2>Resource for multilanguage websites and apps </h2>
+        <a href="https://github.com/LeonardoCiaccio/BlaJs" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="introduzione" class="anchor" href="#introduzione" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduzione</h1>
+
+<p>Blajs nasce dall'esigenza di ottenere una gestione fluida e snella delle traduzioni nelle applicazioni web.
+Online si possono trovare altre librerie che fanno +/- la stessa cosa ma non rientrano nella visione che ho nella gestione delle lingue, ovvero :</p>
+
+<ul>
+<li>Essere semplice da utilizzare</li>
+<li>Traduzioni facili da modificare ed implementare</li>
+<li>Lavorare offline</li>
+<li>Compatibile con la maggior parte dei browser</li>
+<li>Disponibile al momento giusto gestendo il caricamento delle traduzioni/librerie</li>
+</ul>
+
+<p>I commenti ed alcuni riferimenti sono scritti in Italiano perché non padroneggio bene l'inglese e alcuni concetti potrebbero essere spiegati male e/o fraintesi, se ti piace questa libreria e vuoi collaborare potresti iniziare con il tradurre questo file XD</p>
+
+<p>La comprensione di questa libreria è elementare, alcuni concetti sono sottointesi.</p>
+
+<h1>
+<a id="come-funziona" class="anchor" href="#come-funziona" aria-hidden="true"><span class="octicon octicon-link"></span></a>Come funziona</h1>
+
+<p>Blajs espone diverse funzioni/metodi/oggetti pubblici e privati, vediamo quali sono, più avanti faremo degli esempi :</p>
+
+<table>
+<thead>
+<tr>
+<th>Nome</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bla.Bla( {} )</td>
+<td>Caricare un nuovo dizionario/lingua manualmente</td>
+</tr>
+<tr>
+<td>Bla.Debug()</td>
+<td>Attiva/Disattiva il debug della libreria</td>
+</tr>
+<tr>
+<td>Bla.Sniff()</td>
+<td>Recupera la lingua secondo un ordine di priorità, dall'url; dal tag  dal cookie</td>
+</tr>
+<tr>
+<td>Bla.Load( [] )</td>
+<td>Istalla una lista di js che possono essere dizionari ma anche altre librerie</td>
+</tr>
+<tr>
+<td>Bla.Dictionarys()</td>
+<td>Restituisce un array con tutte le lingue installate</td>
+</tr>
+<tr>
+<td>Bla.i18n( "" )</td>
+<td>Dopo essere instanziata restituisce un oggetto con 2 elementi <strong>.Bla( args )</strong> per la traduzione e <strong>.dictionary</strong> che rappresenta la lingua corrente come oggetto</td>
+</tr>
+</tbody>
+</table>
+
+<p>Inseriamo Blajs nella nostra pagina, versione minificata : </p>
+
+<div class="highlight highlight-html"><pre>
+&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span>&gt;
+    &lt;<span class="pl-ent">head</span>&gt;
+
+        &lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span> &gt;
+
+        &lt;<span class="pl-ent">title</span>&gt;Blajs&lt;/<span class="pl-ent">title</span>&gt;
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bla.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">head</span>&gt;    
+    &lt;<span class="pl-ent">body</span>&gt;    
+
+    &lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;
+</pre></div>
+
+<p>Attiviamo il Debug e nella console del nostro browser possiamo visualizzare i messaggi che Blajs offre :</p>
+
+<div class="highlight highlight-html"><pre>
+&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span>&gt;
+    &lt;<span class="pl-ent">head</span>&gt;       
+
+        &lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span> &gt;
+
+        &lt;<span class="pl-ent">title</span>&gt;Blajs&lt;/<span class="pl-ent">title</span>&gt;
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bla.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">head</span>&gt;    
+    &lt;<span class="pl-ent">body</span>&gt;    
+
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Attiviamo il debug</span></span>
+<span class="pl-s1">            Bla.Debug( <span class="pl-c1">true</span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">        &lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;
+</pre></div>
+
+<p>A questo punto una domanda nasce spontanea, come faccio a caricare le lingue ? abbiamo due strade, prima però dobbiamo sapere che la lingua e in formato .js ovvero uno script vero e proprio ed è gestito in questo modo, ad esempio nella cartella "dicts" inseriamo un nuovo file che rinominiamo ad esempio "dict.it-IT.js" e al suo interno inseriamo quanto segue :</p>
+
+<div class="highlight highlight-javascript"><pre>
+Bla.Bla(
+
+    {
+
+        <span class="pl-s"><span class="pl-pds">"</span>bla<span class="pl-pds">"</span></span> <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>it-IT<span class="pl-pds">"</span></span>,                                            <span class="pl-c">// Identificativo del dizionario</span>
+        <span class="pl-s"><span class="pl-pds">"</span>how many people<span class="pl-pds">"</span></span> <span class="pl-k">:</span> {                                       <span class="pl-c">// Chiave per la traduzione</span>
+
+                <span class="pl-s"><span class="pl-pds">"</span>one<span class="pl-pds">"</span></span>  <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Sono solo io !<span class="pl-pds">"</span></span>,                          <span class="pl-c">// Traduzione singolare</span>
+                <span class="pl-s"><span class="pl-pds">"</span>more<span class="pl-pds">"</span></span> <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Noi siamo %n oppure %2$n o %1$n<span class="pl-pds">"</span></span>          <span class="pl-c">// Traduzione plurale</span>
+
+        },
+        <span class="pl-s"><span class="pl-pds">"</span>have a question<span class="pl-pds">"</span></span> <span class="pl-k">:</span> {                                       <span class="pl-c">// Chiave per la traduzione</span>
+
+                <span class="pl-s"><span class="pl-pds">"</span>one<span class="pl-pds">"</span></span>  <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Ho una domanda<span class="pl-pds">"</span></span>,                          <span class="pl-c">// Traduzione singolare</span>
+                <span class="pl-s"><span class="pl-pds">"</span>more<span class="pl-pds">"</span></span> <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Siamo in %n con %n domande<span class="pl-pds">"</span></span>               <span class="pl-c">// Traduzione plurale</span>
+
+        }
+
+    }
+
+);
+</pre></div>
+
+<p>Prima che lo chiediate rispondo si, si puo omettere il pluarale se non serve, se invocato restituirà una stringa vuota, tornando a noi, spiegato come è strutturata una lingua vediamo quali sono le due strade per implementarle al nostro progetto:</p>
+
+<div class="highlight highlight-html"><pre>
+&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span>&gt;
+    &lt;<span class="pl-ent">head</span>&gt;
+
+        &lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span> &gt;
+
+        &lt;<span class="pl-ent">title</span>&gt;Blajs&lt;/<span class="pl-ent">title</span>&gt;
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bla.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>dicts/dict.it-IT.js<span class="pl-pds">"</span></span> &gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">head</span>&gt;    
+    &lt;<span class="pl-ent">body</span>&gt;    
+
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Attiviamo il debug</span></span>
+<span class="pl-s1">            Bla.Debug( <span class="pl-c1">true</span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">        &lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;
+</pre></div>
+
+<p>La prima strada è la più semplice, inserirla subito dopo la libreria anche se io non la preferisco, la seconda è la migliore perché offre il controllo del caricamento della pagina che nel prcedente esempio non abbiamo, vediamo come :</p>
+
+<div class="highlight highlight-html"><pre>&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span>&gt;
+    &lt;<span class="pl-ent">head</span>&gt;
+
+        &lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span> &gt;
+
+        &lt;<span class="pl-ent">title</span>&gt;Blajs&lt;/<span class="pl-ent">title</span>&gt;
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bla.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">head</span>&gt;    
+    &lt;<span class="pl-ent">body</span>&gt;    
+
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Attiviamo il debug</span></span>
+<span class="pl-s1">            Bla.Debug( <span class="pl-c1">true</span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Carichiamo le lingue che ci occorrono</span></span>
+<span class="pl-s1">            Bla.Load( [</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>dicts/dict.it-IT.js<span class="pl-pds">"</span></span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            ], <span class="pl-k">function</span>(){ <span class="pl-c">// Callback eseguita alla fine del caricamento dei file passati</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-en">console</span><span class="pl-c1">.log</span>( <span class="pl-s"><span class="pl-pds">"</span>Dizionario it-IT caricato con successo !<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            } );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">        &lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;
+</pre></div>
+
+<p>Capito perché preferisco questo metodo ? quando sono sicuro che tutte le lingue sono state caricate posso operare tranquillamente, ma non è tutto, posso caricare anche altre librerie ed essere sicuro che queste siano accessibili :</p>
+
+<div class="highlight highlight-html"><pre>
+&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span>&gt;
+    &lt;<span class="pl-ent">head</span>&gt;
+
+        &lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span> &gt;
+
+        &lt;<span class="pl-ent">title</span>&gt;Blajs&lt;/<span class="pl-ent">title</span>&gt;
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bla.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">head</span>&gt;    
+    &lt;<span class="pl-ent">body</span>&gt;    
+
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Attiviamo il debug</span></span>
+<span class="pl-s1">            Bla.Debug( <span class="pl-c1">true</span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Carichiamo le lingue che ci occorrono e altre librerie</span></span>
+<span class="pl-s1">            Bla.Load( [</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>dicts/dict.it-IT.js<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>https://code.jquery.com/jquery-2.1.4.min.js<span class="pl-pds">"</span></span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            ], <span class="pl-k">function</span>(){ <span class="pl-c">// Callback eseguita alla fine del caricamento dei file passati</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-en">console</span><span class="pl-c1">.log</span>( <span class="pl-s"><span class="pl-pds">"</span>Dizionario it-IT caricato con successo e jQuery pronto !<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            } );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">        &lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;
+</pre></div>
+
+<p>Adesso che abbiamo visto come è strutturata una lingua e come renderla disponibile, vediamo come accedervi :</p>
+
+<div class="highlight highlight-html"><pre>
+&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span>&gt;
+    &lt;<span class="pl-ent">head</span>&gt;
+
+        &lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span> &gt;
+
+        &lt;<span class="pl-ent">title</span>&gt;Blajs&lt;/<span class="pl-ent">title</span>&gt;
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bla.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">head</span>&gt;    
+    &lt;<span class="pl-ent">body</span>&gt;    
+
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Attiviamo il debug</span></span>
+<span class="pl-s1">            Bla.Debug( <span class="pl-c1">true</span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Carichiamo le lingue che ci occorrono</span></span>
+<span class="pl-s1">            Bla.Load( [</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>dicts/dict.it-IT.js<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>dicts/dict.en-EN.js<span class="pl-pds">"</span></span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            ], <span class="pl-k">function</span>(){ <span class="pl-c">// Callback eseguita alla fine del caricamento dei file passati</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-c">// Prelevo tutte le lingue [ {},{},{},.... ]</span></span>
+<span class="pl-s1">                <span class="pl-k">var</span> dicts <span class="pl-k">=</span> Bla.Dictionarys();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-en">console</span><span class="pl-c1">.log</span>( <span class="pl-s"><span class="pl-pds">"</span>Blajs ha <span class="pl-pds">"</span></span> <span class="pl-k">+</span> dicts.<span class="pl-c1">length</span> <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> lingue !<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            } );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">        &lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;
+</pre></div>
+
+<p>La variabile "dicts" contiene un array di oggetti una per ogni lingua caricata, avrete notato che ho inserito una nuova lingua "en-EN", questo non è necessario ma potrebbe risultare comodo avere a disposizione le lingue per diversi motivi che non elencheremo, quindi procediamo con il tradurre un testo entrando nel vivo della libreria, altrimenti che l'abbiamo fatta a fare ?</p>
+
+<div class="highlight highlight-html"><pre>
+&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span>&gt;
+    &lt;<span class="pl-ent">head</span>&gt;
+
+        &lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span> &gt;
+
+        &lt;<span class="pl-ent">title</span>&gt;Blajs&lt;/<span class="pl-ent">title</span>&gt;
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bla.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">head</span>&gt;    
+    &lt;<span class="pl-ent">body</span>&gt;    
+
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Attiviamo il debug</span></span>
+<span class="pl-s1">            Bla.Debug( <span class="pl-c1">true</span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Carichiamo le lingue che ci occorrono</span></span>
+<span class="pl-s1">            Bla.Load( [</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>dicts/dict.it-IT.js<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>dicts/dict.en-EN.js<span class="pl-pds">"</span></span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            ], <span class="pl-k">function</span>(){ <span class="pl-c">// Callback eseguita alla fine del caricamento dei file passati</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-c">// Instanzio un traduttore per l'Italiano</span></span>
+<span class="pl-s1">                <span class="pl-k">var</span> i18nIT <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Bla.i18n</span>( <span class="pl-s"><span class="pl-pds">"</span>it-IT<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-c">// Instanzio un traduttore per l'Inglese</span></span>
+<span class="pl-s1">                <span class="pl-k">var</span> i18nEN <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Bla.i18n</span>( <span class="pl-s"><span class="pl-pds">"</span>en-EN<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-en">console</span><span class="pl-c1">.log</span>( <span class="pl-s"><span class="pl-pds">"</span>Questo è un messaggio singolare in Italiano : '<span class="pl-pds">"</span></span> <span class="pl-k">+</span> i18nIT.Bla( <span class="pl-s"><span class="pl-pds">"</span>how many people<span class="pl-pds">"</span></span> ) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>'<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1">                <span class="pl-en">console</span><span class="pl-c1">.log</span>( <span class="pl-s"><span class="pl-pds">"</span>Stesso messaggio in Inglese : '<span class="pl-pds">"</span></span> <span class="pl-k">+</span> i18nEN.Bla( <span class="pl-s"><span class="pl-pds">"</span>how many people<span class="pl-pds">"</span></span> ) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>'<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            } );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">        &lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;
+</pre></div>
+
+<p>Semplicissimo, dopo aver instanziato Bla.i18n() accediamo alla funzione .Bla() per la traduzione, se volessi lavorare con la specifica lingua posso accedere, seguendo l'esempio, all'oggetto .dictionary ovvero i18nIT.dictionary; per lavorare all'occorrenza con la lingua Italiana.</p>
+
+<p>Fin qui tutto ok, ma se devo pluralizzare ? vediamo come fare :</p>
+
+<div class="highlight highlight-html"><pre>
+&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span>&gt;
+    &lt;<span class="pl-ent">head</span>&gt;
+
+        &lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span> &gt;
+
+        &lt;<span class="pl-ent">title</span>&gt;Blajs&lt;/<span class="pl-ent">title</span>&gt;
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bla.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">head</span>&gt;    
+    &lt;<span class="pl-ent">body</span>&gt;    
+
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Attiviamo il debug</span></span>
+<span class="pl-s1">            Bla.Debug( <span class="pl-c1">true</span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Carichiamo le lingue che ci occorrono</span></span>
+<span class="pl-s1">            Bla.Load( [</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>dicts/dict.it-IT.js<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>dicts/dict.en-EN.js<span class="pl-pds">"</span></span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            ], <span class="pl-k">function</span>(){ <span class="pl-c">// Callback eseguita alla fine del caricamento dei file passati</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-c">// Instanzio un traduttore per l'Italiano</span></span>
+<span class="pl-s1">                <span class="pl-k">var</span> i18nIT <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Bla.i18n</span>( <span class="pl-s"><span class="pl-pds">"</span>it-IT<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-c">// Instanzio un traduttore per l'Inglese</span></span>
+<span class="pl-s1">                <span class="pl-k">var</span> i18nEN <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Bla.i18n</span>( <span class="pl-s"><span class="pl-pds">"</span>en-EN<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-en">console</span><span class="pl-c1">.log</span>( <span class="pl-s"><span class="pl-pds">"</span>Questo è un messaggio plurale in Italiano : '<span class="pl-pds">"</span></span> <span class="pl-k">+</span> i18nIT.Bla( <span class="pl-s"><span class="pl-pds">"</span>how many people<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span> ) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>'<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1">                <span class="pl-en">console</span><span class="pl-c1">.log</span>( <span class="pl-s"><span class="pl-pds">"</span>Stesso messaggio in Inglese : '<span class="pl-pds">"</span></span> <span class="pl-k">+</span> i18nEN.Bla( <span class="pl-s"><span class="pl-pds">"</span>how many people<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span> ) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>'<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            } );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">        &lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;
+</pre></div>
+
+<p>Più facile di così, basta aggiungere un "true" e il gioco è fatto, vi sarete accorti che nel messaggio plurale ci sono dei caratteri strani, non vi preoccupate quelli servono per le wildcard ovvero sostituire quei segnaposti con valori variabili %n; %1$n; %2$n; ... se nel testo tradotto si dovresse inserire proprio un segnaposto come testo allora basterà inserire %%n al posto di %n e il risultato sarà %n</p>
+
+<p>Gli argomenti passati possono essere sia stringhe che numeri, in quantità tale da sostituire tutti i segnaposti, alcuni sono con il numero al suo interno questo perché serve per invertire l'ordine d'inserimento per facilitare la traduzione in linguaggi che invertono la posizione dei numeri, se non passiamo nessun valore saranno sostituiti con un bel "undefined" ovvero non definito, facciamo un esempio e tutto sarà più chiaro :</p>
+
+<div class="highlight highlight-html"><pre>
+&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span>&gt;
+    &lt;<span class="pl-ent">head</span>&gt;
+
+        &lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span> &gt;
+
+        &lt;<span class="pl-ent">title</span>&gt;Blajs&lt;/<span class="pl-ent">title</span>&gt;
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bla.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">head</span>&gt;    
+    &lt;<span class="pl-ent">body</span>&gt;    
+
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Attiviamo il debug</span></span>
+<span class="pl-s1">            Bla.Debug( <span class="pl-c1">true</span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Carichiamo le lingue che ci occorrono</span></span>
+<span class="pl-s1">            Bla.Load( [</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>dicts/dict.it-IT.js<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>dicts/dict.en-EN.js<span class="pl-pds">"</span></span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            ], <span class="pl-k">function</span>(){ <span class="pl-c">// Callback eseguita alla fine del caricamento dei file passati</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-c">// Instanzio un traduttore per l'Italiano</span></span>
+<span class="pl-s1">                <span class="pl-k">var</span> i18nIT <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Bla.i18n</span>( <span class="pl-s"><span class="pl-pds">"</span>it-IT<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-c">// Instanzio un traduttore per l'Inglese</span></span>
+<span class="pl-s1">                <span class="pl-k">var</span> i18nEN <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Bla.i18n</span>( <span class="pl-s"><span class="pl-pds">"</span>en-EN<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-en">console</span><span class="pl-c1">.log</span>( <span class="pl-s"><span class="pl-pds">"</span>Questo è un messaggio plurale in Italiano : '<span class="pl-pds">"</span></span> <span class="pl-k">+</span> i18nIT.Bla( <span class="pl-s"><span class="pl-pds">"</span>how many people<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span>, <span class="pl-c1">100</span>, <span class="pl-c1">200</span>, <span class="pl-c1">300</span> ) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>'<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1">                <span class="pl-en">console</span><span class="pl-c1">.log</span>( <span class="pl-s"><span class="pl-pds">"</span>Stesso messaggio in Inglese : '<span class="pl-pds">"</span></span> <span class="pl-k">+</span> i18nEN.Bla( <span class="pl-s"><span class="pl-pds">"</span>how many people<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span>, <span class="pl-c1">100</span>, <span class="pl-c1">200</span>, <span class="pl-c1">300</span> ) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>'<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            } );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">        &lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;
+</pre></div>
+
+<p>Fantastico vero ? ma vi starete chiedendo, perché ha invertito il 300 con il 200 se io li ho passati in ordine ? la risposta è semplice, perché nel dizionario della lingua ho inserito un segnaposto numerico per invertire l'ordine dei parametri, ricordi ?</p>
+
+<div class="highlight highlight-javascript"><pre>
+Bla.Bla(
+
+    {
+
+        <span class="pl-s"><span class="pl-pds">"</span>bla<span class="pl-pds">"</span></span> <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>it-IT<span class="pl-pds">"</span></span>, 
+        <span class="pl-s"><span class="pl-pds">"</span>how many people<span class="pl-pds">"</span></span> <span class="pl-k">:</span> {
+
+                <span class="pl-s"><span class="pl-pds">"</span>one<span class="pl-pds">"</span></span>  <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Sono solo io !<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>more<span class="pl-pds">"</span></span> <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Noi siamo %n oppure %2$n o %1$n<span class="pl-pds">"</span></span>          <span class="pl-c">// &lt;--- Li vedi i segnaposti invertiti ? %2$n o %1$n</span>
+
+        },
+        <span class="pl-s"><span class="pl-pds">"</span>have a question<span class="pl-pds">"</span></span> <span class="pl-k">:</span> {
+
+                <span class="pl-s"><span class="pl-pds">"</span>one<span class="pl-pds">"</span></span>  <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Ho una domanda<span class="pl-pds">"</span></span>,
+                <span class="pl-s"><span class="pl-pds">"</span>more<span class="pl-pds">"</span></span> <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Siamo in %n con %n domande<span class="pl-pds">"</span></span>               <span class="pl-c">// &lt;--- Li vedi i segnaposti invertiti ? %2$n o %1$n</span>
+
+        }
+
+    }
+
+);
+</pre></div>
+
+<p>In fine vediamo a che serve .Sniff(), poniamo l'esempio che vogliamo caricare dinamicamente la lingua senza preoccuparci di inserire quella giusta, come fare ?</p>
+
+<div class="highlight highlight-html"><pre>
+&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span> <span class="pl-e">lang</span>=<span class="pl-s"><span class="pl-pds">"</span>it-IT<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">head</span>&gt;
+
+        &lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span> &gt;
+
+        &lt;<span class="pl-ent">title</span>&gt;Blajs&lt;/<span class="pl-ent">title</span>&gt;
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bla.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">head</span>&gt;    
+    &lt;<span class="pl-ent">body</span>&gt;    
+
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Attiviamo il debug</span></span>
+<span class="pl-s1">            Bla.Debug( <span class="pl-c1">true</span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Rintracciamo la lingua</span></span>
+<span class="pl-s1">            <span class="pl-k">var</span> mylang <span class="pl-k">=</span> Bla.Sniff();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Carichiamo le lingue che ci occorrono</span></span>
+<span class="pl-s1">            Bla.Load( [</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>dicts/dict.<span class="pl-pds">"</span></span> <span class="pl-k">+</span> mylang <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>.js<span class="pl-pds">"</span></span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            ], <span class="pl-k">function</span>(){ <span class="pl-c">// Callback eseguita alla fine del caricamento dei file passati</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-c">// Instanzio un traduttore per la lingua che non conosco</span></span>
+<span class="pl-s1">                <span class="pl-k">var</span> i18n <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Bla.i18n</span>( mylang );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-en">console</span><span class="pl-c1">.log</span>( <span class="pl-s"><span class="pl-pds">"</span>Questo è un messaggio plurale in <span class="pl-pds">"</span></span> <span class="pl-k">+</span> mylang <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span> : '<span class="pl-pds">"</span></span> <span class="pl-k">+</span> i18n.Bla( <span class="pl-s"><span class="pl-pds">"</span>how many people<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span>, <span class="pl-c1">100</span>, <span class="pl-c1">200</span>, <span class="pl-c1">300</span> ) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>'<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            } );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">        &lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;
+</pre></div>
+
+<p>Ovviamente sul server devo avere le lingue necessarie per gestire l'applicazione, ma credo che il messaggio sia chiaro, alcune precisazioni, se effettuate dei test su Chrome il cookie non lo legge se in offline mode ( file:///... ) in oltre .Sniff() rintraccia la lingua secondo un ordine ben preciso, questo è l'ordine di ricerca :</p>
+
+<ul>
+<li>Nell' url della pagina  <code>..<strong>/it-IT/</strong>index.php</code>
+</li>
+<li>Nell' url nei parametri  <code>../miacartella/index.php?<strong>lang=it-IT</strong></code>
+</li>
+<li>Nella proprietà del tag HTML <code>&lt;html <strong>lang="it-IT"</strong>&gt;</code>
+</li>
+<li>In fine nei cookie <code><strong>lang=it-IT</strong>;</code>
+</li>
+</ul>
+
+<p>Per chiudere voglio proporre un esempio un po più avanzato, estendere jQuery con Blajs per tradurre alcuni contenuti nella pagina, in questo esempio sarà possibile tradurre solo al singolare senza wildcard :</p>
+
+<div class="highlight highlight-html"><pre>
+&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span>&gt;
+    &lt;<span class="pl-ent">head</span>&gt;
+
+        &lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span> &gt;
+
+        &lt;<span class="pl-ent">title</span>&gt;Blajs&lt;/<span class="pl-ent">title</span>&gt;
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bla.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">head</span>&gt;    
+    &lt;<span class="pl-ent">body</span>&gt;    
+
+        &lt;<span class="pl-ent">div</span> <span class="pl-e">i18n</span>=<span class="pl-s"><span class="pl-pds">"</span>how many people<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+        &lt;<span class="pl-ent">div</span> <span class="pl-e">i18n</span>=<span class="pl-s"><span class="pl-pds">"</span>have a question<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Attiviamo il debug</span></span>
+<span class="pl-s1">            Bla.Debug( <span class="pl-c1">true</span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Rintraccio la lingua se non la trovo seleziono l'Italiano</span></span>
+<span class="pl-s1">            <span class="pl-k">var</span> mylang <span class="pl-k">=</span> Bla.Sniff() <span class="pl-k">||</span> <span class="pl-s"><span class="pl-pds">"</span>it-IT<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Carichiamo le lingue che ci occorrono e le librerie</span></span>
+<span class="pl-s1">            Bla.Load( [</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>dicts/dict.<span class="pl-pds">"</span></span> <span class="pl-k">+</span> mylang <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>.js<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>https://code.jquery.com/jquery-2.1.4.min.js<span class="pl-pds">"</span></span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            ], <span class="pl-k">function</span>(){ <span class="pl-c">// Callback eseguita alla fine del caricamento dei file passati</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-c">// Estendiamo jQuery con la funzione .Bla();</span></span>
+<span class="pl-s1">                $.fn.extend( {</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                    <span class="pl-en">Bla</span><span class="pl-k">:</span> <span class="pl-k">function</span>(){</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                        <span class="pl-k">var</span> i18n <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Bla.i18n</span>( mylang );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                        <span class="pl-k">return</span> <span class="pl-v">this</span>.each( <span class="pl-k">function</span>(){</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                            <span class="pl-k">var</span> a <span class="pl-k">=</span> $( <span class="pl-v">this</span> ).attr( <span class="pl-s"><span class="pl-pds">"</span>i18n<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                            <span class="pl-k">if</span>( a <span class="pl-k">&amp;&amp;</span> a.<span class="pl-c1">length</span> <span class="pl-k">&gt;</span> <span class="pl-c1">0</span> )$( <span class="pl-v">this</span> ).html( i18n.Bla( a ) );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                        } );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                    }</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                } );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-c">// Traduciamo tutti gli elemnti nella pagina in un colpo solo</span></span>
+<span class="pl-s1">                $( <span class="pl-s"><span class="pl-pds">"</span>div[i18n]<span class="pl-pds">"</span></span> ).Bla();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            } );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">        &lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;
+</pre></div>
+
+<p>Semplice vero ? se state facendo dei test provate ad aggiungere alla fine della pagina ?lang=en-EN e se avete la lingua inglese questa verrà utilizzata altrimenti selezionerà it-IT poiché l'ho settato come default.</p>
+
+<p>Si vabbè ma se volessi passare degli argomenti ? come faccio ? niente paura ecco un esempio :</p>
+
+<div class="highlight highlight-html"><pre>
+&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span>&gt;
+    &lt;<span class="pl-ent">head</span>&gt;
+
+        &lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span> &gt;
+
+        &lt;<span class="pl-ent">title</span>&gt;Blajs&lt;/<span class="pl-ent">title</span>&gt;
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bla.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">head</span>&gt;    
+    &lt;<span class="pl-ent">body</span>&gt;    
+
+        &lt;<span class="pl-ent">div</span> <span class="pl-e">i18n</span>=<span class="pl-s"><span class="pl-pds">"</span>how many people<span class="pl-pds">"</span></span> <span class="pl-e">i18n-args</span>=<span class="pl-s"><span class="pl-pds">"</span>true,100,200,300<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+        &lt;<span class="pl-ent">div</span> <span class="pl-e">i18n</span>=<span class="pl-s"><span class="pl-pds">"</span>have a question<span class="pl-pds">"</span></span> <span class="pl-e">i18n-args</span>=<span class="pl-s"><span class="pl-pds">"</span>true,100,200,300<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">div</span>&gt;
+
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Attiviamo il debug</span></span>
+<span class="pl-s1">            Bla.Debug( <span class="pl-c1">true</span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Rintraccio la lingua se non la trovo seleziono l'Italiano</span></span>
+<span class="pl-s1">            <span class="pl-k">var</span> mylang <span class="pl-k">=</span> Bla.Sniff() <span class="pl-k">||</span> <span class="pl-s"><span class="pl-pds">"</span>it-IT<span class="pl-pds">"</span></span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Carichiamo le lingue che ci occorrono e le librerie</span></span>
+<span class="pl-s1">            Bla.Load( [</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>dicts/dict.<span class="pl-pds">"</span></span> <span class="pl-k">+</span> mylang <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>.js<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>https://code.jquery.com/jquery-2.1.4.min.js<span class="pl-pds">"</span></span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            ], <span class="pl-k">function</span>(){ <span class="pl-c">// Callback eseguita alla fine del caricamento dei file passati</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-c">// Estendiamo jQuery con la funzione .Bla();</span></span>
+<span class="pl-s1">                $.fn.extend( {</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                    <span class="pl-en">Bla</span><span class="pl-k">:</span> <span class="pl-k">function</span>(){</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                        <span class="pl-k">var</span> i18n <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Bla.i18n</span>( mylang );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                        <span class="pl-k">return</span> <span class="pl-v">this</span>.each( <span class="pl-k">function</span>(){</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                            <span class="pl-c">// Tento di prelevare i 2 attributi</span></span>
+<span class="pl-s1">                            <span class="pl-k">var</span> a <span class="pl-k">=</span> $( <span class="pl-v">this</span> ).attr( <span class="pl-s"><span class="pl-pds">"</span>i18n<span class="pl-pds">"</span></span> ),</span>
+<span class="pl-s1">                                b <span class="pl-k">=</span> $( <span class="pl-v">this</span> ).attr( <span class="pl-s"><span class="pl-pds">"</span>i18n-args<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                            <span class="pl-c">// Se ho i parametri li passo, comunque un array</span></span>
+<span class="pl-s1">                            b <span class="pl-k">=</span> ( b <span class="pl-k">&amp;&amp;</span> b.<span class="pl-c1">length</span> <span class="pl-k">&gt;</span> <span class="pl-c1">0</span> ) <span class="pl-k">?</span> b.<span class="pl-c1">split</span>( <span class="pl-s"><span class="pl-pds">"</span>,<span class="pl-pds">"</span></span> ) <span class="pl-k">:</span> [] ;       </span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                            <span class="pl-c">// Controllo se ho la key che è richiesta</span></span>
+<span class="pl-s1">                            <span class="pl-k">if</span>( a <span class="pl-k">&amp;&amp;</span> a.<span class="pl-c1">length</span> <span class="pl-k">&gt;</span> <span class="pl-c1">0</span> ){</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                                <span class="pl-c">// Se ho gli argomenti e se il primo è il flag lo cambio con un valore booleano</span></span>
+<span class="pl-s1">                                <span class="pl-k">if</span>( b.<span class="pl-c1">length</span> <span class="pl-k">&gt;</span> <span class="pl-c1">0</span> ){</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                                    <span class="pl-k">switch</span>( b[ <span class="pl-c1">0</span> ].<span class="pl-c1">toLowerCase</span>() ){</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                                        <span class="pl-k">case</span> <span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span><span class="pl-k">:</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                                            b[ <span class="pl-c1">0</span> ] <span class="pl-k">=</span> <span class="pl-c1">true</span>;</span>
+<span class="pl-s1">                                            <span class="pl-k">break</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                                        <span class="pl-k">case</span> <span class="pl-s"><span class="pl-pds">"</span>false<span class="pl-pds">"</span></span><span class="pl-k">:</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                                            b[ <span class="pl-c1">0</span> ] <span class="pl-k">=</span> <span class="pl-c1">false</span>;</span>
+<span class="pl-s1">                                            <span class="pl-k">break</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                                    }</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                                }</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                                <span class="pl-c">// Aggiungo al primo posto la key per la traduzione</span></span>
+<span class="pl-s1">                                b.<span class="pl-c1">unshift</span>( a );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                                <span class="pl-c">// In fine traduco passando l'array                                </span></span>
+<span class="pl-s1">                                $( <span class="pl-v">this</span> ).html( i18n.Bla( b ) );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                            }</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                        } );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                    }</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                } );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-c">// Traduciamo tutti gli elemnti nella pagina in un colpo solo</span></span>
+<span class="pl-s1">                $( <span class="pl-s"><span class="pl-pds">"</span>div[i18n]<span class="pl-pds">"</span></span> ).Bla();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            } );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">        &lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;
+</pre></div>
+
+<p>Visto ? solo alla fine si capisce che posso tradurre anche passando semplicemente un array nei parametri, quindi se riproviamo con un esempio vecchio vedremo che non cambia nulla :</p>
+
+<div class="highlight highlight-html"><pre>
+&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span>&gt;
+    &lt;<span class="pl-ent">head</span>&gt;
+
+        &lt;<span class="pl-ent">meta</span> <span class="pl-e">charset</span>=<span class="pl-s"><span class="pl-pds">"</span>utf-8<span class="pl-pds">"</span></span> &gt;
+
+        &lt;<span class="pl-ent">title</span>&gt;Blajs&lt;/<span class="pl-ent">title</span>&gt;
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bla.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">head</span>&gt;    
+    &lt;<span class="pl-ent">body</span>&gt;    
+
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Attiviamo il debug</span></span>
+<span class="pl-s1">            Bla.Debug( <span class="pl-c1">true</span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            <span class="pl-c">// Carichiamo le lingue che ci occorrono</span></span>
+<span class="pl-s1">            Bla.Load( [</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>dicts/dict.it-IT.js<span class="pl-pds">"</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">"</span>dicts/dict.en-EN.js<span class="pl-pds">"</span></span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            ], <span class="pl-k">function</span>(){ <span class="pl-c">// Callback eseguita alla fine del caricamento dei file passati</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-c">// Instanzio un traduttore per l'Italiano</span></span>
+<span class="pl-s1">                <span class="pl-k">var</span> i18nIT <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Bla.i18n</span>( <span class="pl-s"><span class="pl-pds">"</span>it-IT<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-c">// Instanzio un traduttore per l'Inglese</span></span>
+<span class="pl-s1">                <span class="pl-k">var</span> i18nEN <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Bla.i18n</span>( <span class="pl-s"><span class="pl-pds">"</span>en-EN<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-c">// Passiamo un array come argomenti</span></span>
+<span class="pl-s1">                <span class="pl-en">console</span><span class="pl-c1">.log</span>( <span class="pl-s"><span class="pl-pds">"</span>Questo è un messaggio plurale in Italiano passando un array : '<span class="pl-pds">"</span></span> <span class="pl-k">+</span> i18nIT.Bla( [ <span class="pl-s"><span class="pl-pds">"</span>how many people<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span>, <span class="pl-c1">100</span>, <span class="pl-c1">200</span>, <span class="pl-c1">300</span> ] ) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>'<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1">                <span class="pl-en">console</span><span class="pl-c1">.log</span>( <span class="pl-s"><span class="pl-pds">"</span>Stesso messaggio in Inglese : '<span class="pl-pds">"</span></span> <span class="pl-k">+</span> i18nEN.Bla( [ <span class="pl-s"><span class="pl-pds">"</span>how many people<span class="pl-pds">"</span></span>, <span class="pl-c1">true</span>, <span class="pl-c1">100</span>, <span class="pl-c1">200</span>, <span class="pl-c1">300</span> ] ) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>'<span class="pl-pds">"</span></span> );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            } );</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">        &lt;/<span class="pl-ent">script</span>&gt;</span>
+
+    &lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;
+</pre></div>
+
+<h1>
+<a id="conclusioni" class="anchor" href="#conclusioni" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusioni</h1>
+
+<p>Questa libreria si presenta semplice, intuitiva, leggera, fluida e si presta ad altre librerie, spero che questo lavoro possa servire a qualcuno, spero che altri arricchiscano Blajs di nuove idee e/o perfezionino questa versione.
+Per chi volesse semplicemente tradurre potrebbe tradurre questo file e/o i commenti nella libreria, sarebbe fantastico, non usate Google Translate perché l'avrei fatto io.</p>
+
+<h1>
+<a id="licenza-mit" class="anchor" href="#licenza-mit" aria-hidden="true"><span class="octicon octicon-link"></span></a>Licenza <a href="https://github.com/LeonardoCiaccio/BlaJs/blob/master/LICENSE">MIT</a>
+</h1>
+
+<p><strong>Leonardo Ciaccio</strong>
+<em><a href="mailto:leonardo.ciaccio@gmail.com">leonardo.ciaccio@gmail.com</a></em></p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/LeonardoCiaccio/BlaJs/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/LeonardoCiaccio/BlaJs/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/LeonardoCiaccio/BlaJs"></a> is maintained by <a href="https://github.com/LeonardoCiaccio">LeonardoCiaccio</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
